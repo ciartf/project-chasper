@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.github.JakeWharton:sdk-manager-plugin:220bf7a88a7072df3ed16dc8466fb144f2817070'
+    }
+}
+
+ext {
+    compileSdkVersion = 23
+    //buildToolsVersion = "23.0.1"
+    buildToolsVersion = '25.0.2'
+    versionCode = 1000
+    versionName = "1.6"
+
+    //adding from me
+    group = 'org.eclipse.paho'
+//    sampleArchivesBaseName = 'org.eclipse.paho.android.sample'
+//    sampleVersion = '1.1.1'
+    serviceArchivesBaseName = 'org.eclipse.paho.android.service'
+    serviceVersion = '1.1.1'
+    clientVersion = '1.1.0'
+    mavenUrl = "https://repo.eclipse.org/content/repositories/paho-releases/"
+    supportLibVersion = '24.2.1'
+}
+
+//adding from me
+def getSdkDirFromLocalProperties() {
+    def rootDir = project.rootDir
+    def localProperties = new File(rootDir, "local.properties")
+    Properties properties = new Properties()
+    localProperties.withInputStream { instr ->
+        properties.load(instr)
+    }
+    properties.getProperty('sdk.dir')
+}
+def androidHome = System.env['ANDROID_HOME']
+def androidHomeIsDefined = androidHome?.trim()
+def sdkDir = androidHomeIsDefined ? androidHome : getSdkDirFromLocalProperties()
+println "SDK dir: $sdkDir"
+
+allprojects {
+    repositories {
+        jcenter()
+        //adding from me
+        maven { url "file://$sdkDir/extras/android/m2repository/" }
+        maven { url 'version = rootProject.ext.serviceVersion' }
+        maven { url 'group = rootProject.ext.group' }
+    }
+}

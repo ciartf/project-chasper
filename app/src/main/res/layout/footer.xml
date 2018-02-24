@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+								 android:layout_width="fill_parent"
+								 android:layout_height="fill_parent"
+								 android:id="@+id/footer" >
+<TextView
+		android:id="@+id/contentVersion"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_above="@+id/contentComment"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:textSize="10dp"
+		android:text="Created by Hendra Danu Laksana" />
+	<TextView
+		android:id="@+id/contentComment"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:text="135150300111071" />
+
+</RelativeLayout>
